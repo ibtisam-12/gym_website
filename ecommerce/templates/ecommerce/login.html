@@ -1,0 +1,26 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block title %}Login - TICHKULE BUILDERS{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <h2>Login</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary-custom btn-lg w-100">Login</button>
+        </form>
+        
+        <div class="text-center mt-3">
+            <p>Don't have an account? <a href="{% url 'user_register' %}" class="text-primary-custom">Register here</a></p>
+        </div>
+    </div>
+{% endblock %}

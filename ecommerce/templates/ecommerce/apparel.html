@@ -1,0 +1,29 @@
+<!-- ecommerce/templates/ecommerce/apparel.html -->
+{% extends 'ecommerce/base.html' %}
+
+{% block title %}Fitness Apparel - TICHKULE BUILDERS{% endblock %}
+
+{% block content %}
+    <section class="product-categories my-5">
+        <div class="container">
+            <h2 class="section-title">Browse Our Fitness Apparel</h2>
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4 mb-4 category-item">
+                        <div class="card h-100 category-card">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="category-img card-img-top">
+                            <div class="card-body text-center">
+                                <h3 class="category-title">{{ product.name }}</h3>
+                                <p class="category-price">${{ product.price }}</p>
+                                <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary-custom w-100 mb-2">View Details</a>
+                                <a href="{% url 'add_to_cart' product.slug %}" class="btn btn-success w-100">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No products available.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

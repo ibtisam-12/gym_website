@@ -1,0 +1,18 @@
+<!-- ecommerce/templates/ecommerce/order_confirmation.html -->
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+    <div class="container my-5">
+        <h2>Order Confirmation</h2>
+        <p>Your order has been successfully placed!</p>
+        <p><strong>Order ID:</strong> {{ order.id }}</p>
+        <p><strong>Name:</strong> {{ order.full_name }}</p>
+        <p><strong>Email:</strong> {{ order.email }}</p>
+        <p><strong>Phone:</strong> {{ order.phone }}</p>
+        <p><strong>Address:</strong> {{ order.address }}</p>
+        <p><strong>Total Amount:</strong> ${{ order.total_amount }}</p>
+        <p><strong>Payment Method:</strong> Cash on Delivery (COD)</p>
+
+        <a href="/" class="btn btn-primary-custom">Back to Home</a>
+    </div>
+{% endblock %}

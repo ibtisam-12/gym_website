@@ -1,0 +1,24 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block title %}Register - TICHKULE BUILDERS{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <h2>Register</h2>
+
+        <!-- Display success message if user is successfully registered -->
+        {% if messages %}
+            <div class="alert alert-success">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary-custom btn-lg w-100">Register</button>
+        </form>
+    </div>
+{% endblock %}

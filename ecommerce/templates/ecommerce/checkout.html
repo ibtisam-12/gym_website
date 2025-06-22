@@ -1,0 +1,73 @@
+<!-- ecommerce/templates/ecommerce/checkout.html -->
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+    <div class="container my-5">
+        <h2>Checkout</h2>
+
+        {% if cart.items.count > 0 %}
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart.items.all %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>${{ item.product.price }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>${{ item.subtotal }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="cart-summary">
+                <h4>Total: ${{ cart.total }}</h4>
+            </div>
+
+            <!-- Cash on Delivery (COD) Button -->
+            <form action="{% url 'checkout' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="full_name">Full Name</label>
+                    <input type="text" id="full_name" name="full_name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Shipping Address</label>
+                    <textarea id="address" name="address" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" name="state" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pincode">Pincode</label>
+                    <input type="text" id="pincode" name="pincode" class="form-control" required>
+                </div>
+
+                <!-- COD Button -->
+                <button type="submit" class="btn btn-primary-custom btn-lg w-100">Place Order with Cash on Delivery</button>
+            </form>
+        {% else %}
+            <p>Your cart is empty. Please add some products to your cart before proceeding.</p>
+        {% endif %}
+    </div>
+{% endblock %}
